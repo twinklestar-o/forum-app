@@ -16,17 +16,6 @@ a:hover {
   text-decoration: underline;
 }
 
-.div-auth{
-  /* max-w-md mx-auto p-4;  */
-  display: flex;
-  flex-direction: column;
-  padding: 10px;
-  width: 98%;
-  justify-content: center;
-  align-items: center;
-  height: 80vh;
-}
-
 /* Container umum untuk halaman */
 .container {
   max-width: 600px;
@@ -50,36 +39,42 @@ h2 {
 
 /* ===================== Navbar ===================== */
 .navbar {
-  background-color: #2563eb; /* blue-600 */
-  color: #fff;
-  padding: 16px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 2px solid #1d4ed8;
+  background: #1e293b;        /* biru tua gelap */
+  padding: 10px 20px;
 }
 
 .navbar-logo {
+  color: #fff;
   font-weight: bold;
-  font-size: 1.25rem;
   text-decoration: none;
-  color: #fff;
+  font-size: 1.2rem;
 }
 
-.navbar-links a {
-  color: #fff;
-  text-decoration: none;
-  margin-left: 16px;
+.navbar-menu {
+  display: flex;
+  gap: 16px;
 }
 
-.navbar-links a:hover {
+.nav-link,
+.logout-button {
+  color: #fff;
+  text-decoration: none;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.nav-link:hover,
+.logout-button:hover {
   text-decoration: underline;
 }
 
-.navbar-user {
-  display: flex;
-  align-items: center;
-  gap: 12px;
+.nav-user{
+  color: white;
 }
 
 .logout-button {
@@ -99,7 +94,7 @@ h2 {
 /* ===================== Forms ===================== */
 input,
 textarea {
-  width:500px;
+  width: 500px;
   padding: 10px;
   margin-bottom: 12px;
   border: 1px solid #d1d5db; /* gray-300 */
@@ -126,19 +121,13 @@ button {
   transition: background-color 0.2s;
 }
 
-.auth-button{
-  width: 500;
-  display: flex;
-  justify-content: end;
-}
-
 button:disabled {
   opacity: 0.6;
   cursor: not-allowed;
 }
 
 .btn-primary {
-  background-color: #2563eb; /* blue */
+  background-color: #2563eb;
 }
 
 .btn-primary:hover {
@@ -146,7 +135,7 @@ button:disabled {
 }
 
 .btn-success {
-  background-color: #16a34a; /* green */
+  background-color: #16a34a;
 }
 
 .btn-success:hover {
@@ -154,7 +143,7 @@ button:disabled {
 }
 
 .btn-danger {
-  background-color: #dc2626; /* red */
+  background-color: #dc2626;
 }
 
 .btn-danger:hover {
@@ -172,7 +161,7 @@ button:disabled {
 
 /* ===================== Threads ===================== */
 .thread-item {
-  border: 1px solid #e5e7eb; /* light gray */
+  border: 1px solid #e5e7eb;
   padding: 16px;
   margin-bottom: 12px;
   border-radius: 8px;
@@ -186,7 +175,7 @@ button:disabled {
 .thread-title {
   font-size: 1.25rem;
   font-weight: 600;
-  color: #1d4ed8; /* blue */
+  color: #1d4ed8;
   text-decoration: none;
 }
 
@@ -195,11 +184,11 @@ button:disabled {
 }
 
 .thread-body {
-  color: #374151; /* gray-700 */
+  color: #374151;
   margin-top: 8px;
   line-height: 1.5;
   display: -webkit-box;
-  -webkit-line-clamp: 2; /* batasi 2 baris */
+  -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -208,7 +197,7 @@ button:disabled {
 
 .thread-meta {
   font-size: 0.875rem;
-  color: #6b7280; 
+  color: #6b7280;
   margin-top: 8px;
   display: flex;
   gap: 8px;
@@ -254,4 +243,64 @@ button:disabled {
   font-size: 0.875rem;
   color: #6b7280;
   margin-top: 4px;
+}
+
+/* ===================== Div Auth ===================== */
+.div-auth {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  width: 98%;
+  justify-content: center;
+  align-items: center;
+  height: 80vh;
+}
+
+.comment-item {
+  border-top: 1px solid #ddd;
+  padding: 8px 0;
+}
+
+.comment-votes {
+  display: flex;
+  align-items: center;
+  margin-top: 4px;
+  gap: 8px;
+}
+
+.vote-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1.1rem;
+}
+
+.vote-count {
+  min-width: 24px;
+  text-align: center;
+}
+
+/* ===================== Floating Button ===================== */
+.floating-btn {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: #2563eb;
+  color: #fff;
+  font-size: 1.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  transition: background-color 0.2s, transform 0.2s;
+}
+
+.floating-btn:hover {
+  background-color: #1d4ed8;
+  transform: translateY(-2px);
 }

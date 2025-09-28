@@ -1,50 +1,69 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { createThread } from '../features/threads/threadsSlice';
+import { useNavigate } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPlus } from '@fortawesome/free-solid-svg-icons';
 
-export default function CreateThreadPage() {
-  const [title, setTitle] = useState('');
-  const [body, setBody] = useState('');
+export default function CreateThread() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const { isLoading } = useSelector((state) => state.threads);
+
+  const [title, setTitle] = useState('');
+  const [category, setCategory] = useState('');
+  const [body, setBody] = useState('');
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!title || !body) return;
-
-    dispatch(createThread({ title, body }));
+    dispatch(createThread({ title, body, category }));
     setTitle('');
+    setCategory('');
     setBody('');
-    alert('Thread berhasil dibuat!');
   };
 
   return (
-    <div className="max-w-xl mx-auto p-4 bg-white shadow rounded">
-      <h1 className="text-xl font-bold mb-4">Buat Thread Baru</h1>
-      <form onSubmit={handleSubmit} className="space-y-4">
-        <div>
-          <label className="block mb-1">Judul</label>
-          <input
-            type="text"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-            className="w-full border px-3 py-2 rounded"
-          />
-        </div>
-        <div>
-          <label className="block mb-1">Isi Thread</label>
-          <textarea
-            value={body}
-            onChange={(e) => setBody(e.target.value)}
-            className="w-full border px-3 py-2 rounded"
-          />
-        </div>
-        <button
-          type="submit"
-          className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
-        >
-          Buat Thread
-        </button>
-      </form>
+    <div className="div-auth">
+      <form onSubmit={handleSubmit} className="border p-4 mb-4 rounded thread-create-form">
+      <h2 className="text-xl font-semibold mb-2">Create Thread</h2>
+      <input
+        className="border p-2 w-full mb-2"
+        placeholder="Title"
+        value={title}
+        onChange={(e) => setTitle(e.target.value)}
+        required
+      />
+      <input
+        className="border p-2 w-full mb-2"
+        placeholder="Category (optional)"
+        value={category}
+        onChange={(e) => setCategory(e.target.value)}
+      />
+      <textarea
+        className="border p-2 w-full mb-2"
+        placeholder="Body"
+        value={body}
+        onChange={(e) => setBody(e.target.value)}
+        required
+      />
+      <button
+        type="submit" 
+        className="btn-primary"
+        disabled={isLoading}
+      >
+        {isLoading ? 'Posting...' : 'Post Thread'}
+      </button>
+
+      {/* Floating Button */}
+      {/* <button
+        type="button"
+        className="floating-btn"
+        onClick={() => navigate('/create')}
+      >
+        <FontAwesomeIcon icon={faPlus} />
+      </button> */}
+    </form>
     </div>
+    
   );
 }

@@ -1,9 +1,13 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { createThread } from '../features/threads/threadsSlice';
+import { useNavigate } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPlus } from '@fortawesome/free-solid-svg-icons';
 
 export default function CreateThread() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { isLoading } = useSelector((state) => state.threads);
 
   const [title, setTitle] = useState('');
@@ -19,7 +23,7 @@ export default function CreateThread() {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="border p-4 mb-4 rounded">
+    <form onSubmit={handleSubmit} className="border p-4 mb-4 rounded thread-create-form">
       <h2 className="text-xl font-semibold mb-2">Create Thread</h2>
       <input
         className="border p-2 w-full mb-2"
@@ -47,6 +51,15 @@ export default function CreateThread() {
         className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 disabled:opacity-50"
       >
         {isLoading ? 'Posting...' : 'Post Thread'}
+      </button>
+
+      {/* Floating Button */}
+      <button
+        type="button"
+        className="floating-btn"
+        onClick={() => navigate('/create')}
+      >
+        <FontAwesomeIcon icon={faPlus} />
       </button>
     </form>
   );

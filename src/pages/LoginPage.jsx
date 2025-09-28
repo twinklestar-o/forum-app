@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { login } from '../features/auth/authSlice';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 
 export default function LoginPage() {
   const dispatch = useDispatch();
@@ -37,7 +37,7 @@ export default function LoginPage() {
           onChange={(e) => setPassword(e.target.value)}
           required
         />
-        <div className="auth-button">
+        <div className="auth-button mb-2">
           <button
             type="submit"
             disabled={isLoading}
@@ -47,6 +47,14 @@ export default function LoginPage() {
           </button>
         </div>
       </form>
+
+      {/* Link ke halaman register */}
+      <p className="mt-2 text-sm">
+        Belum punya akun?{' '}
+        <Link to="/register" className="text-blue-600 hover:underline">
+          Register di sini
+        </Link>
+      </p>
     </div>
   );
 }

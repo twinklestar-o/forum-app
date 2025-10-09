@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { createThread } from '../features/threads/threadsSlice';
 import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
+import { createThread } from '../features/threads/threadsSlice';
 
 export default function CreateThread() {
   const dispatch = useDispatch();
@@ -23,7 +23,10 @@ export default function CreateThread() {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="border p-4 mb-4 rounded thread-create-form">
+    <form
+      onSubmit={handleSubmit}
+      className="border p-4 mb-4 rounded thread-create-form"
+    >
       <h2 className="text-xl font-semibold mb-2">Create Thread</h2>
       <input
         className="border p-2 w-full mb-2"

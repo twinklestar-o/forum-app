@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate, Link } from 'react-router-dom';
 import { registerUser } from '../features/auth/authSlice';
-import { useNavigate } from 'react-router-dom';
 
 export default function RegisterPage() {
   const dispatch = useDispatch();
@@ -54,6 +54,13 @@ export default function RegisterPage() {
           </button>
         </div>
       </form>
+       <p className="mt-2 text-sm">
+              Sudah punya akun?
+              {' '}
+              <Link to="/login" className="text-blue-600 hover:underline">
+                Login di sini
+              </Link>
+            </p>
     </div>
   );
 }

@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import timeAgo from '../utils/timeAgo';
-import '../../src/index.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faThumbsUp, faThumbsDown } from '@fortawesome/free-solid-svg-icons';
+import { Link } from 'react-router-dom';
+import timeAgo from '../utils/timeAgo';
+import '../index.css';
 
 function stripHtml(html) {
   const tmp = document.createElement('div');
@@ -24,10 +24,8 @@ export default function ThreadItem({ thread }) {
       if (!upvoters.some((u) => u.id === CURRENT_USER.id)) {
         setUpvoters([...upvoters, CURRENT_USER]);
       }
-    } else {
-      if (!downvoters.some((u) => u.id === CURRENT_USER.id)) {
-        setDownvoters([...downvoters, CURRENT_USER]);
-      }
+    } else if (!downvoters.some((u) => u.id === CURRENT_USER.id)) {
+      setDownvoters([...downvoters, CURRENT_USER]);
     }
   };
 
@@ -42,34 +40,51 @@ export default function ThreadItem({ thread }) {
       )}
 
       <div className="thread-meta">
-        <span>By {thread.owner?.name || 'Unknown'}</span>
-        <span>• {timeAgo(thread.createdAt)}</span>
-        <span>• {thread.totalComments || 0} comments</span>
+        By 
+        <span>
+          {thread.owner?.name || 'Unknown'}
+        </span>
+        •
+        <span>
+          {timeAgo(thread.createdAt)}
+        </span>
+        •
+        <span>
+          {thread.totalComments || 0}
+          {' '}
+          comments
+        </span>
       </div>
 
       {/* --- Vote Section --- */}
-      <div className="comment-votes" style={{ display: 'flex', alignItems: 'center', gap: '1.5rem', marginTop: '0.5rem' }}>
-        <button
+      <div
+        className="comment-votes"
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+          gap: '1.5rem',
+          marginTop: '0.5rem',
+        }}
+      >
+        <button 
+          type="button"
           className="vote-btn"
+          aria-label="thumbs up"
           onClick={() => handleVote('up')}
           style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}
         >
-          <FontAwesomeIcon
-            icon={faThumbsUp}
-            style={{ color: 'green' }}
-          />
+          <FontAwesomeIcon icon={faThumbsUp} style={{ color: 'green' }} />
           <span>{upvoters.length}</span>
         </button>
 
         <button
+          type="button"
           className="vote-btn"
+          aria-label="thumbs down"
           onClick={() => handleVote('down')}
           style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}
         >
-          <FontAwesomeIcon
-            icon={faThumbsDown}
-            style={{ color: 'red' }}
-          />
+          <FontAwesomeIcon icon={faThumbsDown} style={{ color: 'red' }} />
           <span>{downvoters.length}</span>
         </button>
       </div>

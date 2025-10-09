@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { logout } from '../features/auth/authSlice';
-import '../../src/index.css';
+import '../index.css';
 
 export default function Navbar() {
   const dispatch = useDispatch();
@@ -22,7 +22,14 @@ export default function Navbar() {
             <Link to="/leaderboard" className="nav-link">
               Leaderboard
             </Link>
-            <button className="logout-button" onClick={handleLogout}>
+            <Link to="/create" className="nav-link">
+              Buat Thread
+            </Link>
+            <span className="nav-user">
+              Hi,
+              {user.name}
+            </span>
+            <button type="button" className="logout-button" onClick={handleLogout}>
               Logout
             </button>
           </>

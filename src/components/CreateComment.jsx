@@ -22,11 +22,7 @@ export default function CreateComment({ threadId }) {
         onChange={(e) => setContent(e.target.value)}
         required
       />
-      <button
-        type="submit"
-        disabled={isLoading}
-        className="btn-primary"
-      >
+      <button type="submit" disabled={isLoading} className="btn-primary">
         {isLoading ? 'Submitting...' : 'Add Comment'}
       </button>
     </form>

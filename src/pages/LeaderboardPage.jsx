@@ -5,14 +5,21 @@ import '../index.css';
 
 export default function LeaderboardPage() {
   const dispatch = useDispatch();
-  const { users, isLoading, error } = useSelector(state => state.users);
+  const { users, isLoading, error } = useSelector((state) => state.users);
 
   useEffect(() => {
     dispatch(fetchUsers());
   }, [dispatch]);
 
   if (isLoading) return <p>Loading leaderboard...</p>;
-  if (error) return <p className="text-red-500">Error: {error}</p>;
+  if (error) {
+    return (
+      <p className="text-red-500">
+        Error:
+        {error}
+      </p>
+    );
+  }
   if (!users || users.length === 0) return <p>No users yet.</p>;
 
   // Urutkan berdasarkan score descending
@@ -34,8 +41,16 @@ export default function LeaderboardPage() {
               height="40"
               className="rounded-full"
             />
-            <span>{idx + 1}. {user.name}</span>
-            <span style={{ marginLeft: 'auto' }}>{user.score} pts</span>
+            <span>
+              {idx + 1}
+              .
+              {user.name}
+            </span>
+            <span style={{ marginLeft: 'auto' }}>
+              {user.score}
+              {' '}
+              pts
+            </span>
           </li>
         ))}
       </ul>

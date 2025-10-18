@@ -11,8 +11,8 @@ describe('Login flow', () => {
     cy.visit('/login')
 
     // isi form sesuai placeholder
-    cy.get('input[id="Email"]').type('test12345@example.com')
-    cy.get('input[id="Password"]').type('test12345')
+    cy.get('input[id="Email"]').type('admin12345@gmail.com')
+    cy.get('input[id="Password"]').type('admin12345')
 
     // klik tombol submit
     cy.get('button[type=submit]').click()

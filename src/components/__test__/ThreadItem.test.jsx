@@ -91,10 +91,4 @@ describe('ThreadList / ThreadItem', () => {
     const link = screen.getByText(/Bagaimana pengalamanmu belajar Redux\?/i);
     expect(link.closest('a')).toHaveAttribute('href', `/thread/${threads[0].id}`);
   });
-
-    // 🧨 TEST SENGAJA GAGAL untuk screenshot CI error
-  it('should intentionally fail for CI screenshot', () => {
-    expect(true).toBe(false); // ❌ ini yang sengaja gagal
-  });
-  
 });

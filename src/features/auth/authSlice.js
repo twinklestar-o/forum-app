@@ -1,48 +1,47 @@
-/* eslint-disable no-param-reassign */ // nonaktifkan rule untuk Redux Toolkit
-
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import api from '../../utils/api';
+/* eslint-disable no-param-reassign */
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
+import api from '../../utils/api'
 
 // Thunk: register user
 export const registerUser = createAsyncThunk(
   'auth/registerUser',
   async ({ name, email, password }, { rejectWithValue }) => {
     try {
-      const res = await api.post('/register', { name, email, password });
-      return res.data.data.user;
+      const res = await api.post('/register', { name, email, password })
+      return res.data.data.user
     } catch (err) {
-      return rejectWithValue(err.response?.data?.message || 'Register failed');
+      return rejectWithValue(err.response?.data?.message || 'Register failed')
     }
-  },
-);
+  }
+)
 
 // Thunk: login
 export const login = createAsyncThunk(
   'auth/login',
   async ({ email, password }, { rejectWithValue }) => {
     try {
-      const res = await api.post('/login', { email, password });
-      const { token } = res.data.data;
-      localStorage.setItem('token', token);
-      return { user: res.data.data.user, token };
+      const res = await api.post('/login', { email, password })
+      const { token, user } = res.data.data
+      localStorage.setItem('token', token)
+      return { user, token }
     } catch (err) {
-      return rejectWithValue(err.response?.data?.message || 'Login failed');
+      return rejectWithValue(err.response?.data?.message || 'Login failed')
     }
-  },
-);
+  }
+)
 
 // Thunk: get current user
 export const getMe = createAsyncThunk(
   'auth/getMe',
   async (_, { rejectWithValue }) => {
     try {
-      const res = await api.get('/users/me');
-      return res.data.data.user;
+      const res = await api.get('/users/me')
+      return res.data.data.user
     } catch (err) {
-      return rejectWithValue(err.response?.data?.message || 'Fetch profile failed');
+      return rejectWithValue(err.response?.data?.message || 'Fetch profile failed')
     }
-  },
-);
+  }
+)
 
 const authSlice = createSlice({
   name: 'auth',
@@ -53,48 +52,56 @@ const authSlice = createSlice({
     error: null,
   },
   reducers: {
+    loginSuccess: (state, action) => {
+      // Tambahkan ini agar test reducer tidak gagal
+      state.user = action.payload.user
+      state.token = action.payload.token
+    },
     logout: (state) => {
-      state.user = null;
-      state.token = null;
-      localStorage.removeItem('token');
+      state.user = null
+      state.token = null
+      localStorage.removeItem('token')
     },
   },
   extraReducers: (builder) => {
     builder
+      // register
       .addCase(registerUser.pending, (state) => {
-        state.isLoading = true;
-        state.error = null;
+        state.isLoading = true
+        state.error = null
       })
       .addCase(registerUser.fulfilled, (state) => {
-        state.isLoading = false;
+        state.isLoading = false
       })
       .addCase(registerUser.rejected, (state, action) => {
-        state.isLoading = false;
-        state.error = action.payload;
+        state.isLoading = false
+        state.error = action.payload
       })
 
+      // login
       .addCase(login.pending, (state) => {
-        state.isLoading = true;
-        state.error = null;
+        state.isLoading = true
+        state.error = null
       })
       .addCase(login.fulfilled, (state, action) => {
-        state.isLoading = false;
-        state.user = action.payload.user;
-        state.token = action.payload.token;
+        state.isLoading = false
+        state.user = action.payload.user
+        state.token = action.payload.token
       })
       .addCase(login.rejected, (state, action) => {
-        state.isLoading = false;
-        state.error = action.payload;
+        state.isLoading = false
+        state.error = action.payload
       })
 
+      // getMe
       .addCase(getMe.fulfilled, (state, action) => {
-        state.user = action.payload;
+        state.user = action.payload
       })
       .addCase(getMe.rejected, (state) => {
-        state.user = null;
-      });
+        state.user = null
+      })
   },
-});
+})
 
-export const { logout } = authSlice.actions;
-export default authSlice.reducer;
+export const { loginSuccess, logout } = authSlice.actions
+export default authSlice.reducer

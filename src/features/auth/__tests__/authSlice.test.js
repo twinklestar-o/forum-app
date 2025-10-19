@@ -8,14 +8,12 @@ import authReducer, { loginSuccess, logout } from '../authSlice'
 
 describe('auth reducer', () => {
   it('should return the initial state', () => {
-    // Skenario: Reducer harus mengembalikan state awal saat inisialisasi
     const initial = undefined
     const state = authReducer(initial, { type: '@@INIT' })
     expect(state).toBeDefined()
   })
 
   it('should handle loginSuccess sets user and token', () => {
-    // Skenario: Reducer harus menyimpan user dan token setelah loginSuccess
     const prev = { user: null, token: null }
     const action = loginSuccess({ user: { id: 'u1', name: 'Ruth' }, token: 'abc' })
     const next = authReducer(prev, action)
@@ -24,7 +22,6 @@ describe('auth reducer', () => {
   })
 
   it('should handle logout resets user and token', () => {
-    // Skenario: Reducer harus mereset user dan token setelah logout
     const prev = { user: { id: 'u1' }, token: 'abc' }
     const next = authReducer(prev, logout())
     expect(next.user).toBeNull()

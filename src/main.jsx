@@ -12,3 +12,6 @@ ReactDOM.createRoot(document.getElementById('root')).render(
     </Provider>
   </StrictMode>,
 );
+
+// Tes Branch Protection
+// Mengetes proteksi branch agar CI wajib lulus sebelum merge.

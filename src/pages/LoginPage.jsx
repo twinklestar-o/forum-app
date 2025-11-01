@@ -19,7 +19,7 @@ export default function LoginPage() {
       // setelah login sukses, redirect
       navigate('/');
     } catch (err) {
-      console.log('Login gagal:', err); // error sudah ada di state.auth.error
+      // console.log('Login gagal:', err); // error sudah ada di state.auth.error
     }
   };
 

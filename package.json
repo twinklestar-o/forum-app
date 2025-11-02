@@ -12,8 +12,7 @@
     "test:watch": "vitest",
     "test:ui": "vitest --ui",
     "cypress:open": "cypress open",
-    "cypress:run": "cypress run",
-    "e2e": "npx cypress run --browser chrome --headless"
+    "cypress:run": "cypress run"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^7.0.1",
